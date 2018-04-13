@@ -1,9 +1,9 @@
-body{
+/*body{
     text-align: center;
-}
+}*/
 
-/*
-Found formatting online, most likely won't use
+
+/*Found formatting online, most likely won't use*/
 body {
   font-family: 'Roboto Slab', sans-serif;
   background: white;
@@ -21,6 +21,7 @@ input {
   font-family: 'Roboto Slab', sans-serif;
   font-size: 16px;
   outline: none;
+  text-align: center;
 }
 
 pre, code {
@@ -60,4 +61,8 @@ form {
 h3 {
   margin-top: 0;
 }
-*/
+.border{
+  border: 1px solid black;
+  border-radius: 25px;
+}
+

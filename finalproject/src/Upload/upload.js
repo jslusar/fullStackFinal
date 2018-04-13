@@ -1,6 +1,7 @@
 import './upload.css';
 import React, { Component } from 'react';
 import {Link } from 'react-router-dom'
+import {Button} from 'react-bootstrap';
 // import ReactDOM from 'react-dom';
 
 
@@ -9,17 +10,19 @@ export default class Upload extends Component {
     constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state= {fileList: null}
   }
+
 
    handleSubmit(event) {
     event.preventDefault();
-    const data = new FormData(event.target);
+    console.log(event.target.files)
+    var myForm = document.getElementById('myForm');
+    const data = new FormData(myForm);
     console.log(stringifyFormData(data))}
 
-// this.setState({
-//       res: stringifyFormData(data),
-//     });
-// }
+
+
 
 /*} fetch('/api/form-submit-url', {  this link will go to our database
       method: 'POST',
@@ -29,35 +32,54 @@ export default class Upload extends Component {
 
   render() {
     return(
-      <div className="body">
-        <h1>Post Submission</h1>
+      <div className="body border container">
+        <h1>Post Submission <Button bsStyle="primary" href='/'>Home</Button> </h1>
         <h5> Let us know what you are doing!</h5>
-        <form onSubmit={this.handleSubmit}>
+        <form  className="row" id="myForm" name="myForm" onSubmit={this.handleSubmit}>
+        <section className="col-4">
+            <h5>STEP ONE</h5>
             <label htmlFor="name">
                 First and Last Name: <br/>
                 <input type="text" name="name" required/>
             </label>
+        </section>
             <br/>
+        <section className="col-4">
+            <h5>STEP TWO</h5>
             <label htmlFor="organization">
                 What organization are you posting for? <br/>
                 <input type="text" name="organization" required/>
             </label>
+        </section>
             <br/>
+        <section className="col-4">
+            <h5>STEP THREE</h5>
             <label htmlFor="title">
                 Title of your post: <br/>
                 <input type="text" name="title" required/>
             </label>
+        </section>
             <br/>
+        <section className="col-4">
+            <h5>STEP FOUR</h5>
             <label htmlFor="description">
                 What is your idea? <br/>
+                <p>You will also have the option to upload a file below.</p>
                 <input type="text" name="description" required/>
             </label>
+        </section>
             <br/>
+        <section className="col-4">
+            <h5>STEP FIVE</h5>
             <label htmlFor="tags">
-                Describe your post: These will be used as search TAGS for this document. (ex. voting, elections, hiring, auditions, etc.) <br/>
+                Describe your post: <br/>
+                <p>These will be used as search TAGS for this document. (ex. voting, elections, hiring, auditions, etc.) </p>
                 <input type="text" name="tags" required/>
             </label>
+        </section>
             <br/>
+        <section className="col-4">
+            <h5>STEP SIX</h5>
            <label htmlFor="progress">
                 How is it going? <br/>
                 <select name="progress">
@@ -66,17 +88,20 @@ export default class Upload extends Component {
                     <option value="Finished" name="progress">Finished</option>
                 </select>
             </label>
+        </section>
             <br/>
+        <section className="col-12">
+            <h5>STEP SEVEN</h5>
             <label htmlFor="file">
-                Upload a file: PDFs only please <br/>
-                <input type="file" id="input" name="file" accept="application/pdf" multiple onchange="handleFiles(this.files)"/>
+                Upload a file: <br/>
+                <p>PDFs only please </p>
+                <input type="file" name="file" accept="application/pdf" multiple/>
             </label>
+        </section>
             <br/>
 
                 <button>Submit</button>
         </form>
-
-        <Link to ='/'>Home</Link>
 
 
       </div>
@@ -93,14 +118,4 @@ function stringifyFormData(fd) {
   return JSON.stringify(data, null, 2);
 }
 
-//     var inputElement = document.getElementById("input");
-// inputElement.addEventListener("change", handleFiles, false);
-// function handleFiles() {
-//   var fileList = this.files; /* now you can work with the file list */
-// }
-// {this.state.res && (
-//             <div className="res-block">
-//             <h3>Data to be sent:</h3>
-//             <pre>FormData {this.state.res}</pre>
-//             </div>
-//         )}
+
