@@ -12,6 +12,11 @@ body {
   text-align: center;
 }
 
+
+.float{
+  float: right;
+}
+
 input {
   display: block;
   margin-bottom: 15px;
