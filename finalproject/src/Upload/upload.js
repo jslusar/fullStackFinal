@@ -4,43 +4,6 @@ import {Link } from 'react-router-dom'
 import {Button, Grid, Row, Col} from 'react-bootstrap';
 // import ReactDOM from 'react-dom';
 
-/*THIS CONNECTS DATABASE AND CREATES SCHEMA, DO we put this here? copy path from github?*/
-
-// const express = require('express')
-// const bodyParser = require('body-parser')
-// const app = express()
-// const fetch = require('node-fetch')
-
-// // create db connection
-// const mongoose = require('mongoose')
-// const fs = require('fs')
-// const config = JSON.parse(fs.readFileSync('fullStackFinal/finalproject/config.json', 'UTF-8'))
-// mongoose.connect(config.dburl)
-// var db = mongoose.connection
-
-// // define the order schema
-// var postSchema = mongoose.Schema({
-//   name: String,
-//   organization: String,
-//   title: String,
-//   description: String,
-//   tags: String,
-//   progress: String,
-//   file: [String] ????
-// })
-// // bind schema to the mongodb collection 'club-posts'
-// var  clubPost = mongoose.model('club-posts', postSchema)
-
-// // set to remove all docs in database, if there is anything leftover
-// var cleanDb = false
-
-// if (cleanDb === true){
-//   clubPost.remove({}, err=>{
-//     if(err) console.log("failed to remove all docs")
-//   })
-// }
-
-
 export default class Upload extends Component {
 
     constructor() {
@@ -52,19 +15,21 @@ export default class Upload extends Component {
 
    handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target.files)
     var myForm = document.getElementById('myForm');
     const data = new FormData(myForm);
-    console.log(stringifyFormData(data))}
+     fetch('http://localhost:2000/insert', {  //this link will go to our database
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+      .then(r=>r.json())
+
+    console.log(event.target.files)
+
+    console.log(stringifyFormData(data))
+}
 
 
-
-
-/* fetch('http://localhost:3000/', {  this link will go to our database
-      method: 'POST',
-      body: data,
-    });
-  */
 
   render() {
     return(

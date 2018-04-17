@@ -48,6 +48,7 @@ if (cleanDb === true){
 // so all req's will be passed through
 // the bodyParser.json() function
 app.use(bodyParser.json())
+app.use(express.json());
 
 app.get('/', function(req, res){
     getPosts(function(err,posts){
@@ -57,4 +58,20 @@ app.get('/', function(req, res){
         res.json(posts);
     });
 });
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+
+app.post('/insert', function(req, res){
+    var item = {
+        name: req.body.name,
+        organization: req.body.organization,
+        title: req.body.title,
+        description: req.body.description,
+        tags: req.body.tags,
+        progress: req.body.progress,
+        file: req.body.file
+    };
+    clubPost.insertOne(item, function(err, result){
+        assert.equal(null,err)
+        console.log("item inserted")
+    });
+});
+app.listen(2000, () => console.log('Example app listening on port 2000!'))
