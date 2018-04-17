@@ -49,8 +49,7 @@ if (cleanDb === true){
 // the bodyParser.json() function
 app.use(bodyParser.json())
 
-
-app.get('/', function(res, req){
+app.get('/', function(req, res){
     getPosts(function(err,posts){
         if (err){
             throw err;
