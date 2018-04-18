@@ -19,6 +19,7 @@ export default class Upload extends Component {
     const data = new FormData(myForm);
      fetch('http://localhost:2000/insert', {  //this link will go to our database
         method: "POST",
+        // mode: 'no-cors',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       })

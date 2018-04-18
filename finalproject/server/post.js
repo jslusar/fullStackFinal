@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const fetch = require('node-fetch')
+const cors = require('cors')
 
 // create db connection
 const mongoose = require('mongoose')
@@ -47,10 +48,11 @@ if (cleanDb === true){
 // no route, means apply to ALL routes
 // so all req's will be passed through
 // the bodyParser.json() function
+app.use(cors());
 app.use(bodyParser.json())
 app.use(express.json());
 
-app.get('/', function(req, res){
+app.get('/get', function(req, res){
     getPosts(function(err,posts){
         if (err){
             throw err;
@@ -60,6 +62,14 @@ app.get('/', function(req, res){
 });
 
 app.post('/insert', function(req, res){
+
+  // var item = new postSchema(req.body)
+  // item.save(function(err, callback){
+  //   if (err){
+  //     res.send(err)
+  //   }
+  //   res.json(callback)
+  // })
     var item = {
         name: req.body.name,
         organization: req.body.organization,
