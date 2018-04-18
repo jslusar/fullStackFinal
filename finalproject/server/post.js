@@ -27,7 +27,7 @@ var postSchema = mongoose.Schema({
     required: true},
   progress: {type: String,
     required: true},
-  file: [String]
+  file: String
 })
 // bind schema to the mongodb collection 'club-posts'
 var  clubPost = mongoose.model('club-posts', postSchema)
@@ -50,9 +50,8 @@ if (cleanDb === true){
 // the bodyParser.json() function
 app.use(cors());
 app.use(bodyParser.json())
-app.use(express.json());
 
-app.get('/get', function(req, res){
+app.get('/api', function(req, res){
     getPosts(function(err,posts){
         if (err){
             throw err;
@@ -61,27 +60,16 @@ app.get('/get', function(req, res){
     });
 });
 
-app.post('/insert', function(req, res){
+app.post('/api/insert', function(req, res){
 
-  // var item = new postSchema(req.body)
-  // item.save(function(err, callback){
-  //   if (err){
-  //     res.send(err)
-  //   }
-  //   res.json(callback)
-  // })
-    var item = {
-        name: req.body.name,
-        organization: req.body.organization,
-        title: req.body.title,
-        description: req.body.description,
-        tags: req.body.tags,
-        progress: req.body.progress,
-        file: req.body.file
-    };
-    clubPost.insertOne(item, function(err, result){
-        assert.equal(null,err)
-        console.log("item inserted")
-    });
+// console.log('post', req.body)
+
+  var item = new clubPost(req.body)
+  item.save(function(err, callback){
+    if (err){
+      res.send(err)
+    }
+   res.json(callback)
+  });
 });
 app.listen(2000, () => console.log('Example app listening on port 2000!'))

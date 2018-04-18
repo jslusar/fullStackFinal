@@ -1,33 +1,50 @@
 import './upload.css';
 import React, { Component } from 'react';
-import {Link } from 'react-router-dom'
-import {Button, Grid, Row, Col} from 'react-bootstrap';
-// import ReactDOM from 'react-dom';
+import {Button, Grid, Row, Col, Modal} from 'react-bootstrap';
 
 export default class Upload extends Component {
 
     constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state= {fileList: null}
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false
+    };
+  }
+handleClose(e) {
+    this.setState({ show: false });
+  }
+
+  handleShow(e) {
+    this.setState({ show: true });
   }
 
 
    handleSubmit(event) {
     event.preventDefault();
-    var myForm = document.getElementById('myForm');
-    const data = new FormData(myForm);
-     fetch('http://localhost:2000/insert', {  //this link will go to our database
+    let data = {
+      name: this.refs.name.value,
+      organization: this.refs.organization.value,
+      title: this.refs.title.value,
+      description: this.refs.description.value,
+      tags: this.refs.tags.value,
+      progress: this.refs.progress.value,
+      file: this.refs.file.value
+    };
+     fetch('http://localhost:2000/api/insert', {  //this link will go to our database
         method: "POST",
-        // mode: 'no-cors',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
-      })
-      .then(r=>r.json())
+      }).then(resp => {
+        if(resp.status === 200){
+            this.handleShow();
+        }
+        })
 
-    console.log(event.target.files)
-
-    console.log(stringifyFormData(data))
+    console.log(JSON.stringify(data))
 }
 
 
@@ -45,7 +62,7 @@ export default class Upload extends Component {
             <h5>STEP ONE</h5>
             <label htmlFor="name">
                 First and Last Name: <br/>
-                <input type="text" name="name" required/>
+                <input type="text" ref="name" required/>
             </label>
         </Col>
             <br/>
@@ -53,7 +70,7 @@ export default class Upload extends Component {
             <h5>STEP TWO</h5>
             <label htmlFor="organization">
                 What organization are you posting for? <br/>
-                <input type="text" name="organization" required/>
+                <input type="text" ref="organization" required/>
             </label>
         </Col>
             <br/>
@@ -61,7 +78,7 @@ export default class Upload extends Component {
             <h5>STEP THREE</h5>
             <label htmlFor="title">
                 Title of your post: <br/>
-                <input type="text" name="title" required/>
+                <input type="text" ref="title" required/>
             </label>
         </Col>
         </Row>
@@ -72,7 +89,7 @@ export default class Upload extends Component {
             <label htmlFor="description">
                 What is your idea? <br/>
                 <p>You will also have the option to upload a file below.</p>
-                <input type="text" name="description" required/>
+                <input type="text" ref="description" required/>
             </label>
         </Col>
             <br/>
@@ -81,7 +98,7 @@ export default class Upload extends Component {
             <label htmlFor="tags">
                 Describe your post: <br/>
                 <p>These will be used as search TAGS for this document. (ex. voting, elections, hiring, auditions, etc.) </p>
-                <input type="text" name="tags" required/>
+                <input type="text" ref="tags" required/>
             </label>
         </Col>
             <br/>
@@ -89,10 +106,10 @@ export default class Upload extends Component {
             <h5>STEP SIX</h5>
            <label htmlFor="progress">
                 How is it going? <br/>
-                <select name="progress">
-                    <option value="Just an Idea" name="progress">Just an Idea</option>
-                    <option value="In Progress" name="progress">In Progress</option>
-                    <option value="Finished" name="progress">Finished</option>
+                <select ref="progress">
+                    <option value="Just an Idea">Just an Idea</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Finished">Finished</option>
                 </select>
             </label>
         </Col>
@@ -104,7 +121,7 @@ export default class Upload extends Component {
             <label htmlFor="file">
                 Upload a file: <br/>
                 <p>PDFs only please </p>
-                <input type="file" name="file" accept="application/pdf" multiple/>
+                <input type="file" ref="file" accept="application/pdf" multiple/>
             </label>
         </Col>
         <Col xs={6} md={6} lg={6}>
@@ -115,20 +132,25 @@ export default class Upload extends Component {
 
         </form>
         </Grid>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Submission Post Succesful</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+                <p>Thank you for submitting information on your organization!</p>
+                <p>If you would like to sumbit another post click the Again button below.</p>
+                <p>Or you can find your post and others by clicking the Search button.</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button href='/upload'> Again </Button>
+            <Button onClick={this.handleClose} href='/search'>Search</Button>
+          </Modal.Footer>
+        </Modal>
 
 
       </div>
     );
   }
-}
-
-
-function stringifyFormData(fd) {
-  const data = {};
-    for (let key of fd.keys()) {
-    data[key] = fd.get(key);
-  }
-  return JSON.stringify(data, null, 2);
 }
 
 
