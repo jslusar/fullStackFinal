@@ -1,11 +1,11 @@
-/*THIS CONNECTS DATABASE AND CREATES SCHEMA, DO we put this here? copy path from github?*/
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const fetch = require('node-fetch')
 const cors = require('cors')
+// import {org} from "./../src/Search/search.js"
 
+/*THIS CONNECTS DATABASE AND CREATES SCHEMA*/
 // create db connection
 const mongoose = require('mongoose')
 const fs = require('fs')
@@ -36,6 +36,7 @@ var  clubPost = mongoose.model('club-posts', postSchema)
     clubPost.find(callback).limit(limit);
  }
 
+
 // set to remove all docs in database, if there is anything leftover
 var cleanDb = false
 
@@ -59,6 +60,16 @@ app.get('/api', function(req, res){
         res.json(posts);
     });
 });
+var org = 'full'
+app.get('/api/' + org, function(req,res){
+    clubPost.find({ 'organization': org }, function (err, docs) {
+  if (err){
+      res.send(err)
+    }
+   res.json(docs)
+  });
+});
+
 
 app.post('/api/insert', function(req, res){
 
