@@ -15,6 +15,7 @@ export default class Upload extends Component {
       modal: false
     };
   }
+<<<<<<< HEAD
 // handleClose(e) {
 //     this.setState({ show: false });
 //   }
@@ -27,6 +28,14 @@ export default class Upload extends Component {
       modal: !this.state.modal
     });
     console.log("modal state: " + this.state.modal)
+=======
+
+  static defaultProps = {organizations: ["The Silhouettes", "The Offbeats", "Beyond Unison",
+                        "Two Past Midnight", "The Bucknellian", "Chi Phi", "Delta Gamma"] ,
+                    }
+handleClose(e) {
+    this.setState({ show: false });
+>>>>>>> 3f0d567d369ce596969eea6240276d81a199a64d
   }
 
    handleSubmit(event) {
@@ -56,6 +65,11 @@ export default class Upload extends Component {
 
 
   render() {
+
+    let Organization = this.props.organizations.map(category => {
+        return <option key={category} value={category}>{category}</option>
+    })
+
     return(
       <div className="body border">
         <h1>Post Submission <Button className="float" color="primary" href='/'>Home</Button> </h1>
@@ -75,9 +89,10 @@ export default class Upload extends Component {
         <Col xs={4} md={4} lg={4}>
             <h5>STEP TWO</h5>
             <label htmlFor="organization">
-                What organization are you posting for? <br/>
-                <input type="text" ref="organization" required/>
-            </label>
+                What organization are you posting for? </label><br/>
+                <select ref="organization" required>
+                    {Organization}
+                </select>
         </Col>
             <br/>
         <Col xs={4} md={4} lg={4}>
