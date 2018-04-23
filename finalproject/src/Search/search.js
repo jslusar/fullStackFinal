@@ -1,8 +1,7 @@
 import './search.css';
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import { Card, CardText, CardTitle, CardSubtitle, CardHeader, CardFooter} from 'reactstrap';
-import {Button, Grid, Row, Col} from 'react-bootstrap';
+import { Card, CardText, CardTitle, CardSubtitle, CardHeader, CardFooter, Container, Row, Col, Button} from 'reactstrap';
 
     let org = '';
 export default class Search extends Component {
@@ -11,14 +10,14 @@ export default class Search extends Component {
     constructor(props){
         super(props);
         this.state = {data: null};
-        this.getOrganization = this.getOrganization.bind(this)
+        // this.getOrganization = this.getOrganization.bind(this)
     }
 
-    getOrganization(e,id){
-        // e.preventDefault();
-        console.log("this is the id" + id)
-        let org = id;
-    }
+    // getOrganization(e,id){
+    //     e.preventDefault();
+    //     console.log("this is the id" + id)
+    //     let org = id;
+    // }
 
     componentDidMount(){
         fetch('http://localhost:2000/api')
@@ -34,17 +33,27 @@ export default class Search extends Component {
         results.forEach(function(item) {
     if (output.indexOf(item["organization"]) === -1) {
       output.push(item["organization"]);
-    }
-});
+            }
+        });
+        console.log(output)
          //create an html of the query
         for (var i = 0; i < output.length;  i += 1) {
-            title= output[i]
-          orgs.push(<Col xs={3} md={3} lg={3}>
-                    <Card body className="card">
+            var f= function(org){
+
+                var title = org
+
+                return function(e){
+                    e.preventDefault();
+                    console.log("title "+ title)
+                }
+            }
+          orgs.push( <Col key = {output[i]} auto>
+                    <Card body  className="card">
                         <CardTitle>{output[i]}</CardTitle>
-                        <Button bsStyle="warning"  onClick={(e) => this.getOrganization(e, title)} href = "/newsfeed">See Posts</Button>
+                        <Button bsStyle="warning"  onClick={f(output[i])} href = "/newsfeed">See Posts</Button>
                     </Card>
-                    </Col>)
+                    </Col>
+                    )
         }
         console.log(results)
         this.setState({data: orgs})
@@ -59,11 +68,13 @@ export default class Search extends Component {
     return(
       <div>
         <h1>Search Page <Button className="float" bsStyle="primary" href='/'>Home</Button></h1>
-        <Grid>
+        <Container>
         <Row>
+
         {this.state.data}
+
         </Row>
-        </Grid>
+        </Container>
       </div>
 
     );

@@ -1,27 +1,33 @@
 import './upload.css';
 import React, { Component } from 'react';
-import {Button, Grid, Row, Col, Modal} from 'react-bootstrap';
+import {Button, Container, Row, Col, Modal,  ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 export default class Upload extends Component {
 
     constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    // this.handleShow = this.handleShow.bind(this);
+    // this.handleClose = this.handleClose.bind(this);
+    this.toggle = this.toggle.bind(this);
 
     this.state = {
-      show: false
+      modal: false
     };
   }
-handleClose(e) {
-    this.setState({ show: false });
-  }
+// handleClose(e) {
+//     this.setState({ show: false });
+//   }
 
-  handleShow(e) {
-    this.setState({ show: true });
+//   handleShow(e) {
+//     this.setState({ show: true });
+//   }
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
+    console.log("modal state: " + this.state.modal)
   }
-
 
    handleSubmit(event) {
     event.preventDefault();
@@ -40,7 +46,7 @@ handleClose(e) {
         body: JSON.stringify(data)
       }).then(resp => {
         if(resp.status === 200){
-            this.handleShow();
+            this.toggle();
         }
         })
 
@@ -52,9 +58,9 @@ handleClose(e) {
   render() {
     return(
       <div className="body border">
-        <h1>Post Submission <Button className="float" bsStyle="primary" href='/'>Home</Button> </h1>
+        <h1>Post Submission <Button className="float" color="primary" href='/'>Home</Button> </h1>
         <h5> Let us know what you are doing!</h5>
-        <Grid>
+        <Container>
 
         <form id="myForm" name="myForm" onSubmit={this.handleSubmit}>
         <Row>
@@ -131,26 +137,36 @@ handleClose(e) {
 
 
         </form>
-        </Grid>
-        <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Submission Post Succesful</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-                <p>Thank you for submitting information on your organization!</p>
-                <p>If you would like to sumbit another post click the Again button below.</p>
-                <p>Or you can find your post and others by clicking the Search button.</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button href='/upload'> Again </Button>
-            <Button onClick={this.handleClose} href='/search'>Search</Button>
-          </Modal.Footer>
+        </Container>
+            <Modal isOpen={this.state.modal} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+          <ModalBody>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
+            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          </ModalFooter>
         </Modal>
+
 
 
       </div>
     );
   }
 }
-
+// <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+//           <ModalHeader toggle={this.toggle}>
+//             Submission Post Succesful
+//           </ModalHeader>
+//           <ModalBody>
+//                 <p>Thank you for submitting information on your organization!</p>
+//                 <p>If you would like to sumbit another post click the Again button below.</p>
+//                 <p>Or you can find your post and others by clicking the Search button.</p>
+//           </ModalBody>
+//           <ModalFooter>
+//             <Button color= "primary" href='/upload'> Again </Button>
+//             <Button color = "secondary" onClick={this.toggle} href='/search'>Search</Button>
+//           </ModalFooter>
+//         </Modal>
 
