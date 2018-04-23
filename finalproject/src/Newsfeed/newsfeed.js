@@ -1,7 +1,7 @@
 import './newsfeed.css';
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import { Card, CardText, CardTitle, CardSubtitle, CardHeader, CardFooter, CardBody, Button, Container, Row, Col} from 'reactstrap';
+import { Card, CardText, CardTitle, CardSubtitle, CardFooter, CardBody, Button, Container, Row, Col} from 'reactstrap';
 import {org} from './../Search/search.js'
 
 
@@ -23,7 +23,7 @@ export default class Newsfeed extends Component {
         //create an html of the query
         var cards = []
         for (var j = 0; j < results.length;  j += 1) {
-          cards.push(<Col key = {results[j]} xs={4} md={4} lg={4}>
+          cards.push(<Col key = {results[j]} sm={"3"} md={"3"} lg={"3"}>
                     <Card className="card">
                         <CardBody>
                         <CardTitle>{results[j]["title"]}</CardTitle>
@@ -49,7 +49,7 @@ export default class Newsfeed extends Component {
   render() {
     return(
       <div>
-        <h1><Button className="float2" bsStyle="primary" href='/search'>Back</Button>Search Page <Button className="float" bsStyle="primary" href='/'>Home</Button></h1>
+        <h1><Button className="float2" color="primary" href='/search'>Back</Button>Search Page <Button className="float" color="primary" href='/'>Home</Button></h1>
         <Container>
         <Row>
         {this.state.data}

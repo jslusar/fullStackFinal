@@ -15,7 +15,6 @@ export default class Upload extends Component {
       modal: false
     };
   }
-<<<<<<< HEAD
 // handleClose(e) {
 //     this.setState({ show: false });
 //   }
@@ -28,14 +27,6 @@ export default class Upload extends Component {
       modal: !this.state.modal
     });
     console.log("modal state: " + this.state.modal)
-=======
-
-  static defaultProps = {organizations: ["The Silhouettes", "The Offbeats", "Beyond Unison",
-                        "Two Past Midnight", "The Bucknellian", "Chi Phi", "Delta Gamma"] ,
-                    }
-handleClose(e) {
-    this.setState({ show: false });
->>>>>>> 3f0d567d369ce596969eea6240276d81a199a64d
   }
 
    handleSubmit(event) {
@@ -65,11 +56,6 @@ handleClose(e) {
 
 
   render() {
-
-    let Organization = this.props.organizations.map(category => {
-        return <option key={category} value={category}>{category}</option>
-    })
-
     return(
       <div className="body border">
         <h1>Post Submission <Button className="float" color="primary" href='/'>Home</Button> </h1>
@@ -89,10 +75,9 @@ handleClose(e) {
         <Col xs={4} md={4} lg={4}>
             <h5>STEP TWO</h5>
             <label htmlFor="organization">
-                What organization are you posting for? </label><br/>
-                <select ref="organization" required>
-                    {Organization}
-                </select>
+                What organization are you posting for? <br/>
+                <input type="text" ref="organization" required/>
+            </label>
         </Col>
             <br/>
         <Col xs={4} md={4} lg={4}>
@@ -152,17 +137,22 @@ handleClose(e) {
 
 
         </form>
-        </Container>
-            <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>
+            Submission Post Succesful
+          </ModalHeader>
           <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <p>Thank you for submitting information on your organization!</p>
+                <p>If you would like to sumbit another post click the Again button below.</p>
+                <p>Or you can find your post and others by clicking the Search button.</p>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color= "primary" href='/upload'> Again </Button>
+            <Button color = "secondary" onClick={this.toggle} href='/search'>Search</Button>
           </ModalFooter>
         </Modal>
+        </Container>
+
 
 
 
@@ -170,18 +160,5 @@ handleClose(e) {
     );
   }
 }
-// <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-//           <ModalHeader toggle={this.toggle}>
-//             Submission Post Succesful
-//           </ModalHeader>
-//           <ModalBody>
-//                 <p>Thank you for submitting information on your organization!</p>
-//                 <p>If you would like to sumbit another post click the Again button below.</p>
-//                 <p>Or you can find your post and others by clicking the Search button.</p>
-//           </ModalBody>
-//           <ModalFooter>
-//             <Button color= "primary" href='/upload'> Again </Button>
-//             <Button color = "secondary" onClick={this.toggle} href='/search'>Search</Button>
-//           </ModalFooter>
-//         </Modal>
+
 
