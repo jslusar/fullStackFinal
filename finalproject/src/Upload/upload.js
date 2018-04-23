@@ -6,37 +6,35 @@ export default class Upload extends Component {
 
     constructor() {
     super();
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
     // this.handleShow = this.handleShow.bind(this);
     // this.handleClose = this.handleClose.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.toggle = this.toggle.bind(this)
 
     this.state = {
       modal: false
-    };
-  }
-<<<<<<< HEAD
-// handleClose(e) {
-//     this.setState({ show: false });
-//   }
+    }
+
+    }
+
+static defaultProps = {organizations: ["The Silhouettes", "The Offbeats", "Beyond Unison",
+                        "Two Past Midnight", "The Bucknellian", "Chi Phi", "Delta Gamma"] ,
+                }
+
 
 //   handleShow(e) {
 //     this.setState({ show: true });
 //   }
-  toggle() {
+toggle() {
     this.setState({
       modal: !this.state.modal
     });
-    console.log("modal state: " + this.state.modal)
-=======
+console.log("modal state: " + this.state.modal)
+}
 
-  static defaultProps = {organizations: ["The Silhouettes", "The Offbeats", "Beyond Unison",
-                        "Two Past Midnight", "The Bucknellian", "Chi Phi", "Delta Gamma"] ,
-                    }
 handleClose(e) {
     this.setState({ show: false });
->>>>>>> 3f0d567d369ce596969eea6240276d81a199a64d
-  }
+};
 
    handleSubmit(event) {
     event.preventDefault();
