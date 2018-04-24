@@ -60,9 +60,9 @@ app.get('/api', function(req, res){
         res.json(posts);
     });
 });
-var org = 'full'
-app.get('/api/' + org, function(req,res){
-    clubPost.find({ 'organization': org }, function (err, docs) {
+app.get('/api/org/:orgs', function(req,res){
+    var organization = req.params.orgs;
+    clubPost.find({ 'organization': organization }, function (err, docs) {
   if (err){
       res.send(err)
     }

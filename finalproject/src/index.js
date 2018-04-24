@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css';
 import App from './App';
 import Upload from './Upload/upload.js'
@@ -8,6 +9,7 @@ import Upload from './Upload/upload.js'
   import Newsfeed from './Newsfeed/newsfeed.js'
   import { Switch, Route} from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker';
+
 
 ReactDOM.render((
     <BrowserRouter>

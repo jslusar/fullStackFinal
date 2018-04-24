@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, ButtonGroup} from 'react-bootstrap';
+import {Button, ButtonGroup} from 'reactstrap';
   // import { Switch, Route, Link } from 'react-router-dom'
   // import Upload from './Upload/upload.js'
   // import Search from './Search/search.js'
@@ -20,8 +20,8 @@ class App extends Component {
           To get started, select Upload or Search below.
         </p>
         <ButtonGroup justified>
-          <Button bsStyle="primary" href='/upload'>Upload</Button>
-          <Button bsStyle="primary" href='/search'>Search</Button>
+          <Button color="primary" href='/upload'>Upload</Button>
+          <Button color="primary" href='/search'>Search</Button>
         </ButtonGroup>
       </div>
 

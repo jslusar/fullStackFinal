@@ -1,7 +1,7 @@
 import './search.css';
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import { Card, CardBody, CardSubtitle, CardText, CardFooter, CardTitle, Container, Row, Col, Button} from 'reactstrap';
+import { Card, CardBody, CardSubtitle, CardText, CardHeader, CardFooter, CardTitle, Container, Row, Col, Button} from 'reactstrap';
 
     let org = '';
 export default class Search extends Component {
@@ -9,43 +9,7 @@ export default class Search extends Component {
 
     constructor(props){
         super(props);
-        this.state = {data: null, header: 'Search Page'};
-        this.getPosts = this.getPosts.bind(this);
-    }
-
-    getPosts(club){
-        // e.preventDefault();
-        console.log("this is org " + club)
-        fetch('http://localhost:2000/api/' + club)
-        .then(resp => {
-          return resp.json()
-        })
-        .then(results => {
-        //create an html of the query
-        var a = 0;
-        var cards = []
-        for (var j = 0; j < results.length;  j += 1) {
-          cards.push(<Col key = {a++} sm={"3"} md={"3"} lg={"3"}>
-                    <Card className="card">
-                        <CardBody>
-                        <CardTitle>{results[j]["title"]}</CardTitle>
-                        <CardSubtitle>{results[j]["name"]}</CardSubtitle>
-                        <CardText>{results[j]["description"]}</CardText>
-                               <Button color="warning">See Attached File(s)</Button>
-                        </CardBody>
-                        <CardFooter className="text-muted">{results[j]["progress"] + " -- Tags: " + results[j]["tags"]}</CardFooter>
-
-                    </Card>
-                    </Col>)
-        }
-        // console.log(results)
-        // console.log(cards)
-        this.setState({data: cards, header: club})
-        })
-
-      .catch(function(error) {
-        console.log(error);
-        });
+        this.state = {data: null, header: 'Search Page',button: null};
     }
 
 
@@ -74,45 +38,46 @@ export default class Search extends Component {
                 return function(e){
                     // e.preventDefault();
                     console.log("title "+ ctitle)
-//                      console.log("this is org " + ctitle)
-//                 fetch('http://localhost:2000/api/' + ctitle)
-//                     .then(resp => {
-//                     return resp.json()
-//                     })
-//                     .then(results => {
-//                     //create an html of the query
-//                     console.log(results)
-//                      var a = 0;
-//                     var cards = []
-//                 for (var j = 0; j < results.length;  j += 1) {
-//                     cards.push(<Col key = {a++} sm={"3"} md={"3"} lg={"3"}>
-//                     <Card className="card">
-//                         <CardBody>
-//                         <CardTitle>{results[j]["title"]}</CardTitle>
-//                         <CardSubtitle>{results[j]["name"]}</CardSubtitle>
-//                         <CardText>{results[j]["description"]}</CardText>
-//                                <Button color="warning">See Attached File(s)</Button>
-//                         </CardBody>
-//                         <CardFooter className="text-muted">{results[j]["progress"] + " -- Tags: " + results[j]["tags"]}</CardFooter>
+                     console.log("this is org " + ctitle)
+                fetch('http://localhost:2000/api/org/' + ctitle)
+                    .then(resp => {
+                    return resp.json()
+                    })
+                    .then(results => {
+                    //create an html of the query
+                    console.log(results)
+                     var a = 0;
+                    var cards = []
+                for (var j = 0; j < results.length;  j += 1) {
+                    cards.push(<Col key = {a++} sm={"3"} md={"3"} lg={"3"}>
+                    <Card className="card">
+                        <CardHeader className="text-muted">{results[j]["progress"]} </CardHeader>
+                        <CardBody>
+                        <CardTitle>{results[j]["title"]}</CardTitle>
+                        <CardSubtitle>{results[j]["name"]}</CardSubtitle>
+                        <CardText>{results[j]["description"]}</CardText>
+                               <Button color="warning">See Attached File(s)</Button>
+                        </CardBody>
+                        <CardFooter className="text-muted">{"Tags: " + results[j]["tags"]}</CardFooter>
 
-//                     </Card>
-//                     </Col>)
-//                     }
-//                     // console.log(results)
-//                     console.log(cards)
-//                     this.setState({data: cards, header: ctitle})
-//                  })
+                    </Card>
+                    </Col>)
+                    }
+                    // console.log(results)
+                    console.log(cards)
+                    this.setState({data: cards, header: ctitle, button: <Button className="floatL" color="primary" href="/search">Back</Button>})
+                 })
 
-//                 .catch(function(error) {
-//                  console.log(error);
-//                     });
+                .catch(function(error) {
+                 console.log(error);
+                    });
 // }
 }
         }
           orgs.push( <Col sm={3} md={3} lg={3} key = {output[i]}>
                     <Card body  className="card">
                         <CardTitle>{output[i]}</CardTitle>
-                        <Button color="warning"  onClick={ f(output[i]) }>See Posts</Button>
+                        <Button color="warning"  onClick={ f(output[i]).bind(this) }>See Posts</Button>
                     </Card>
                     </Col>
                     )
@@ -130,7 +95,7 @@ export default class Search extends Component {
   render() {
     return(
       <div>
-        <h1>{this.state.header}<Button className="float" color="primary" href='/'>Home</Button></h1>
+        <h1>{this.state.button}{this.state.header}<Button className="float" color="primary" href='/'>Home</Button></h1>
         <Container>
         <Row>
 
