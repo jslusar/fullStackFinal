@@ -9,7 +9,7 @@ export default class Search extends Component {
 
     constructor(props){
         super(props);
-        this.state = {data: null, header: 'Search Page',button: null};
+        this.state = {data: null, header: 'Choose an Organization',button: null};
     }
 
 

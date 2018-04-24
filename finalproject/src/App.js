@@ -13,16 +13,23 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={require("./B.png") } alt="Bucknell B" className="App-logo" />
-          <h1 className="App-title">Answers on Bucknell Clubs</h1>
+
+          <h1 className="title">Answers on Bucknell Clubs</h1>
+<br/>
+<br/>
+                  <p className="App-intro"> Here you can upload helpful information on your organization. <br/> OR <br/> Have a question? Search through all our helpful posts.</p>
+
         </header>
-        <p className="App-intro">
-          To get started, select Upload or Search below.
-        </p>
+<br/>
         <ButtonGroup justified>
-          <Button color="primary" href='/upload'>Upload</Button>
-          <Button color="primary" href='/search'>Search</Button>
+          <Button color="secondary" href='/upload' className="button">Upload</Button>
+          <img src={require("./arrows.png") } alt="Bucknell B" className="App-logo" />
+          <Button color="secondary" href='/search' className="button">Search</Button>
         </ButtonGroup>
+        <br/>
+                <p className="App-intro">
+          To get started, select Upload or Search above.
+        </p>
       </div>
 
     );
