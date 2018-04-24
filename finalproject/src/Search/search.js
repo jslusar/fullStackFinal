@@ -54,7 +54,7 @@ export default class Search extends Component {
                         <CardHeader className="text-muted">{results[j]["progress"]} </CardHeader>
                         <CardBody>
                         <CardTitle>{results[j]["title"]}</CardTitle>
-                        <CardSubtitle>{results[j]["name"]}</CardSubtitle>
+                        <CardSubtitle>{"Written by: " + results[j]["name"]}</CardSubtitle>
                         <CardText>{results[j]["description"]}</CardText>
                                <Button color="warning">See Attached File(s)</Button>
                         </CardBody>

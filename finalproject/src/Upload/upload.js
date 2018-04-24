@@ -7,8 +7,6 @@ export default class Upload extends Component {
     constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this)
-    // this.handleShow = this.handleShow.bind(this);
-    // this.handleClose = this.handleClose.bind(this);
     this.toggle = this.toggle.bind(this)
 
     this.state = {
