@@ -71,3 +71,10 @@ h3 {
   border-radius: 25px;
 }
 
+.big-text {
+  font-size: 24px;
+}
+
+#body {
+  background-color: coral;
+}
