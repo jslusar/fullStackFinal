@@ -1,23 +1,25 @@
 import './search.css';
 import React, { Component } from 'react';
-import { ButtonGroup, Card, CardBody, CardSubtitle, CardHeader, CardFooter, CardTitle, Container, Row, Col, Button, Popover, PopoverHeader, PopoverBody} from 'reactstrap';
+import { ButtonGroup, Card, CardBody, CardText, CardSubtitle, CardHeader, CardFooter, CardTitle, Container, Row, Col, Button, Popover, PopoverHeader, PopoverBody} from 'reactstrap';
 
 
 export default class Search extends Component {
 
     constructor(props){
         super(props);
+        this.getPosts = this.getPosts.bind(this);
+        this.toggle = this.toggle.bind(this);
         this.state = {data: null, header: 'Choose an Organization',button: null, popoverOpen: false};
-        this.getPosts = this.getPosts.bind(this)
-        this.toggle = this.toggle(this)
+
     }
 
     //used to toggle the popover to show the description of each post
     toggle(){
+        console.log(this.state.popoverOpen);
         this.setState({
             popoverOpen: !this.state.popoverOpen
         });
-        console.log(this.state.popoverOpen)
+        console.log(this.state.popoverOpen);
     }
 
     //fetch from the database all of the posts
@@ -32,27 +34,21 @@ export default class Search extends Component {
                 var a = 0;
                 var cards = []
                 for (var j = 0; j < results.length;  j += 1) {
-                    cards.push(<Col key = {a++} sm={"3"} md={"3"} lg={"3"}>
+                    cards.push(<Col key = {a++} sm={"6"} md={"6"} lg={"6"}>
                     <Card outline color="primary" className="card">
                         <CardHeader className="text-muted">{results[j]["organization"] + ' ('+results[j]["progress"]+')'} </CardHeader>
                         <CardBody>
                             <CardTitle>{results[j]["title"]}</CardTitle>
                             <CardSubtitle>{"Written by: " + results[j]["name"]}</CardSubtitle>
+                            <CardText>{results[j]["description"]}</CardText>
                             <br/>
-                            <ButtonGroup>
-                                <Button color="secondary" id="Popover1" onClick={this.toggle}>See Description</Button>
                                 <Button color="warning">See Attached File(s)</Button>
-                            </ButtonGroup>
                         </CardBody>
                         <CardFooter className="text-muted">{"Tags: " + results[j]["tags"]}</CardFooter>
                     </Card>
-                     <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
-                        <PopoverHeader>Description</PopoverHeader>
-                        <PopoverBody>{results[j]["description"]}</PopoverBody>
-                     </Popover>
+
                     </Col>)
                 }
-                console.log(cards)
                 //update the page with the new cards of all the posts, a new header, and add a back button on top left
                 this.setState({data: cards, header: 'All Organizations', button: <Button className="floatL" color="primary" href="/search">Back</Button>})
             })
@@ -98,24 +94,18 @@ export default class Search extends Component {
                                     var a = 0;
                                     var cards = []
                                     for (var j = 0; j < results.length;  j += 1) {
-                                        cards.push(<Col key = {a++} sm={"3"} md={"3"} lg={"3"}>
+                                        cards.push(<Col key = {a++} sm={"6"} md={"6"} lg={"6"}>
                                             <Card outline color="primary" className="card">
-                                                <CardHeader className="text-muted">{results[j]["progress"]} </CardHeader>
+                                                <CardHeader className="text-muted">{results[j]["organization"] + ' ('+results[j]["progress"]+')'} </CardHeader>
                                                 <CardBody>
                                                     <CardTitle>{results[j]["title"]}</CardTitle>
                                                     <CardSubtitle>{"Written by: " + results[j]["name"]}</CardSubtitle>
+                                                    <CardText>{results[j]["description"]}</CardText>
                                                     <br/>
-                                                    <ButtonGroup >
-                                                        <Button color="secondary" id="Popover1" onClick={this.toggle}>See Description</Button>
-                                                        <Button color="warning">See Attached File(s)</Button>
-                                                    </ButtonGroup>
+                                                    <Button color="warning">See Attached File(s)</Button>
                                                 </CardBody>
                                                 <CardFooter className="text-muted">{"Tags: " + results[j]["tags"]}</CardFooter>
                                             </Card>
-                                            <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
-                                                <PopoverHeader>Description</PopoverHeader>
-                                                <PopoverBody>{results[j]["description"]}</PopoverBody>
-                                            </Popover>
                                         </Col>)
                                     }
                                     //update screen to show the new cards for the specific org
