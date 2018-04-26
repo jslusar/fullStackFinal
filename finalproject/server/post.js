@@ -3,7 +3,6 @@ const bodyParser = require('body-parser')
 const app = express()
 const fetch = require('node-fetch')
 const cors = require('cors')
-// import {org} from "./../src/Search/search.js"
 
 /*THIS CONNECTS DATABASE AND CREATES SCHEMA*/
 // create db connection
@@ -31,20 +30,11 @@ var postSchema = mongoose.Schema({
 })
 // bind schema to the mongodb collection 'club-posts'
 var  clubPost = mongoose.model('club-posts', postSchema)
-//get posts
+//get all the posts in the database posts
  getPosts = function(callback, limit){
     clubPost.find(callback).limit(limit);
  }
 
-
-// set to remove all docs in database, if there is anything leftover
-var cleanDb = false
-
-if (cleanDb === true){
-  clubPost.remove({}, err=>{
-    if(err) console.log("failed to remove all docs")
-  })
-}
 // .use binds to all http methods
 // no route, means apply to ALL routes
 // so all req's will be passed through
@@ -52,6 +42,7 @@ if (cleanDb === true){
 app.use(cors());
 app.use(bodyParser.json())
 
+//get all of the posts in the database
 app.get('/api', function(req, res){
     getPosts(function(err,posts){
         if (err){
@@ -60,6 +51,8 @@ app.get('/api', function(req, res){
         res.json(posts);
     });
 });
+
+//get all the posts in the database that have the organization name given as :orgs in the link
 app.get('/api/org/:orgs', function(req,res){
     var organization = req.params.orgs;
     clubPost.find({ 'organization': organization }, function (err, docs) {
@@ -70,11 +63,8 @@ app.get('/api/org/:orgs', function(req,res){
   });
 });
 
-
+//insert a post to the database
 app.post('/api/insert', function(req, res){
-
-// console.log('post', req.body)
-
   var item = new clubPost(req.body)
   item.save(function(err, callback){
     if (err){
@@ -83,4 +73,6 @@ app.post('/api/insert', function(req, res){
    res.json(callback)
   });
 });
+
+//host the server on localhost:2000
 app.listen(2000, () => console.log('Example app listening on port 2000!'))

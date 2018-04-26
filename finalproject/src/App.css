@@ -8,9 +8,10 @@
 }
 
 .App-header {
-  background-image: url("homepage.jpg");
-  height: 250px;
-  padding: 20px;
+  background-image: url("home.jpg");
+  width: 1150px;
+  border-radius: 25px;
+  margin: auto;
 }
 
 .App-title {
@@ -20,16 +21,18 @@
 
 .App-intro {
   font-size: large;
-  color: orange;
+  color: white;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-body{
-    background-image: url("homepage.jpg");
+.intro{
+  font-size: 30px;
+  color: black;
 }
+
 .button{
   text-align: center;
   line-height: 250px;
@@ -41,6 +44,7 @@ body{
     color: white;
   font-size: 75px
 }
+
 .small{
   font-size: 20px
 }

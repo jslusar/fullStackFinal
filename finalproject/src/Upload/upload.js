@@ -14,17 +14,17 @@ export default class Upload extends Component {
       };
     }
 
-    static defaultProps = {organizations: ["No Specific Organization", "'Nell Party", "Accounting Club", "Active Minds", "Activities and Campus Events", 
-                        "Alpha Chi Omega", "Alpha Delta Pi", "Alpha Lambda Delta Honor Society", "Alpha Phi Omega", 
-                        "Alpha Psi Omega", "Alpha Xi Delta", "AmpSoul", "Anime Society", "Arabic Club", "Art Collective", 
-                        "Asian Pacific American Student Association", "Athletics", "BE Magazine", "Beyond Unison", 
+    static defaultProps = {organizations: ["No Specific Organization", "'Nell Party", "Accounting Club", "Active Minds", "Activities and Campus Events",
+                        "Alpha Chi Omega", "Alpha Delta Pi", "Alpha Lambda Delta Honor Society", "Alpha Phi Omega",
+                        "Alpha Psi Omega", "Alpha Xi Delta", "AmpSoul", "Anime Society", "Arabic Club", "Art Collective",
+                        "Asian Pacific American Student Association", "Athletics", "BE Magazine", "Beyond Unison",
                         "Biology Club", "Biomedical Engineering Society", "Bison Beatz Tap Club", "Bison Bikes", "Bison Firsts",
                         "Bison Girls Dance Team", "Bison Investment Club", "Bison Pals", "Bison Running Club", "Bisonettes",
-                        "Black Student Union", "BLINC", "Bucks's Orchestra", "Bucknell Brigade", "Bucknell Buddies", 
-                        "Bucknell Business Leaders", "Bucknell Club Badminton", "Bucknell Consulting Group", "Bucknell Photography Club", 
-                        "Bucknell Student Government", "Bucknell's Africa Student Association", "Bucknellian", "BuckWild", 
+                        "Black Student Union", "BLINC", "Bucks's Orchestra", "Bucknell Brigade", "Bucknell Buddies",
+                        "Bucknell Business Leaders", "Bucknell Club Badminton", "Bucknell Consulting Group", "Bucknell Photography Club",
+                        "Bucknell Student Government", "Bucknell's Africa Student Association", "Bucknellian", "BuckWild",
                         "Burmese Cultural Organization", "Business Review", "C.A.L.V.I.N. & H.O.B.B.E.S.", "Campus Activities and Programs",
-                        "Campus Vinyl", "Cap and Dagger", "Caribbean Students Association", "Chess Club", "Chi Epsilon", "Chi Omega", 
+                        "Campus Vinyl", "Cap and Dagger", "Caribbean Students Association", "Chess Club", "Chi Epsilon", "Chi Omega",
                          "Chi Phi", "Chinese Students and Scholars Association", "Civic Engagement", "Classics Club", "CLIMBucknell",
                          "Club Cycling", "Club Field Hockey", "Club Ice Hockey", "Club Sailing", "Club Spike Ball", "Club Swim Team",
                          "Club Tennis", "College Democrats", "College Dropout", "College Republicans at Bucknell", "Colleges Against Cancer",
@@ -34,7 +34,7 @@ export default class Upload extends Component {
                          "Film Club", "French Club", "Gender & Sexuality Alliance", "German Club", "Habitat for Humanity",
                          "Headstart", "Her Campus Bucknell", "History Club", "Interfraternity Council", "International Student Services",
                          "InterVarsity Christian Fellowship", "Irish Dance Club", "Italian Club", "Japan Society", "Jewish Life/Hillel",
-                         "Kappa Alpha Theta", "Kappa Delta Pi", "Kappa Delta Rho", "Kappa Kappa Gamma", "Kappa Sigma", 
+                         "Kappa Alpha Theta", "Kappa Delta Pi", "Kappa Delta Rho", "Kappa Kappa Gamma", "Kappa Sigma",
                          "Korean Cultural Association", "L'Agenda Yearbook", "Lambda Chi Alpha", "LACOS", "LGBT Awareness",
                          "Love Your Melon Campus Crew", "Magic Club", "Makers and Robotics Club", "Men's Club Water Polo",
                          "Men's Rugby Football Club", "Mock Trial", "Model United Nations", "Mortar Board", "Mu Sigma Upsilon",
@@ -42,12 +42,12 @@ export default class Upload extends Component {
                          "Nutrition Initiative Program", "Omicron Delta Kappa", "Operation Smile", "Order of Omega", "OEL",
                          "Outing Club", "Panhellenic Council", "Pep Band", "Philosophy Club", "Pre-Health Society", "Psi Chi",
                          "Real Estate Club", "Religious Life", "Roots and Shoots", "Rotaract Club", "Russian Club", "Shotokan Karate Club",
-                         "Sigma Chi", "Sigma Iota Rho", "Sigma Phi Epsilon", "Silhouettes", "South Asian Student Association", 
-                         "Student Art Association", "Student Emergency Response Volunteers", "Student Transfer Association", 
-                         "Students for Nepal", "Students for Sustainable Development", "Students Helping Animals", 
+                         "Sigma Chi", "Sigma Iota Rho", "Sigma Phi Epsilon", "Silhouettes", "South Asian Student Association",
+                         "Student Art Association", "Student Emergency Response Volunteers", "Student Transfer Association",
+                         "Students for Nepal", "Students for Sustainable Development", "Students Helping Animals",
                          "Tau Kappa Epsilon", "Tea Enjoyment & Aprreciation", "The Brigade", "The Humanities Review",
                          "The Offbeats", "Theater and Dance", "Tibet Culture Association", "Two Past Midnight", "Ubuntu Club",
-                         "Uptown", "Venture Capital Club", "Vietnamese Student Association", "Voices of Praise", 
+                         "Uptown", "Venture Capital Club", "Vietnamese Student Association", "Voices of Praise",
                          "We Brake For Nobody", "Women's Club Lacrosse", "Women's Club Soccer", "Women's Club Ultimate Frisbee",
                          "Women's Resource Center", "Women's Volleyball Club", "Writers of Rohan", "Writing Center", "WVBU-FM"] ,
                 }
@@ -91,7 +91,7 @@ export default class Upload extends Component {
    })
     return(
       <div>
-        <img src={require("./../homepage.jpg") } />
+        <img src={require("./../homepage.jpg") } alt=""/>
         <Navbar>
           <NavbarBrand href="/" className="big-text">Answers On Bucknell Clubs</NavbarBrand>
           <Nav className="ml-auto" navbar>

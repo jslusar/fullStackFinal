@@ -1,9 +1,35 @@
 .card{
     border-radius: 25px;
-    border: 1px solid orange;
+    margin: 10px 10px 20px 10px;
+}
+.cardO{
+    height: 125px;
+    border-radius: 25px;
     margin: 10px 10px 20px 10px;
 }
 .floatL{
     float: left;
 }
 
+.pic{
+    background-image: url("./../homepage.jpg");
+    height: 210px;
+    width: 1100px;
+    border-radius: 25px;
+    margin: auto;
+    color: white;
+    font-size: 75px;
+    vertical-align: center;
+
+}
+.width{
+    margin: auto;
+    width:60px;
+}
+.club{
+    margin: auto;
+    font-size: 25px;
+    white-space: normal;
+    max-width: 600px;
+    text-decoration: none !important;
+}
