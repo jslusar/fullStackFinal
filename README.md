@@ -28,9 +28,14 @@ Below is our data structure that we used in our Mongo Database.  As you can see 
   file: String
 }
 ```
-Thus, every post will have an author (name), the organization they are posting about (from a dropdown menu), the title of their post (so that users can glance and know what the post is about), 
-a description of what they want to post about, some tags that the user will be able to ctrl + f to easily find the post by, the progress of their idea that they are posting about (from a dropdown menu of Just an Idea, In Progress, Finished),
-and/or the path of a file upload (if they have information they would like to upload). -- The files are being hosted on an s3 bucket in AWS.
+Thus, every post will have:
+1. An author (name)
+2. The name of the organization they are posting about (from a dropdown menu)
+3. The title of their post (so that users can glance and know what the post is about)
+4. A description of what the post is about (this is especially required if no files are uploaded because then this is the only information on the post)
+5. Some tags that the user will be able to (ctrl + f) easily find the post by
+6. The progress of their idea that they are posting about (from a dropdown menu of Just an Idea, In Progress, Finished)
+7. Maybe the path of a file upload (if they have information they would like to upload). -- The files are being hosted on an s3 bucket in AWS.
 
 ## How to Deploy to AWS:
 
