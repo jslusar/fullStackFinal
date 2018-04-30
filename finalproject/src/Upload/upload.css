@@ -7,9 +7,8 @@
 body {
   font-family: 'Roboto Slab', sans-serif;
   background: white;
-  color: #484848;
-  padding: 40px;
   text-align: center;
+  background-image: url("./../light-grey-terrazzo.png")
 }
 
 
@@ -37,12 +36,11 @@ button {
   cursor: pointer;
   padding: 12px;
   background: #999;
-  font-family: 'Roboto Slab', sans-serif;
   font-size: 16px;
   border: none;
   outline: none;
   color: white;
-  border-bottom: 2px solid #797979;
+  border-radius: 15px;
 
   &:hover {
     background-color: #a1a1a1;
@@ -69,5 +67,18 @@ h3 {
 .border{
   border: 1px solid black;
   border-radius: 25px;
+  padding: 50px;
+  padding-left: 150px;
+  padding-right: 150px;
+  background-color: orange;
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
+.input {
+  width: 100%;
+}
+
+.big-text {
+  font-size: 24px;
+}

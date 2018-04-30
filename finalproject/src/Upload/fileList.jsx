@@ -14,7 +14,7 @@ class FileRow extends Component {
   // so it can have the unique key prop.
   // if every item in the list has a unique key, react can optimize refreshs
   // probably overkill since the whole row changes at the same time.
-  
+
   render(){
     let fi = this.props.fileinfo
     let d = Date.parse(fi.LastModified)
@@ -57,7 +57,9 @@ export default class FileList extends Component{
     //request the file be deleted from S3
     console.log("delete reqested for", key)
     fetch(this.props.host+'/remove/'+key,
-      {method:'POST'})
+      {
+        method:'POST',
+      })
       .then(resp=>resp.json())
       .then(resp=>{
         console.log("delete result", resp)
@@ -80,7 +82,7 @@ export default class FileList extends Component{
 
     fetch(this.props.host+'/upload',{
       method: 'POST',
-      body: fd
+      body: fd,
     })
       .then(resp=>resp.json())
       .then(resp=>{
@@ -111,7 +113,8 @@ export default class FileList extends Component{
     if (!noFlush){
       this.setState({files:[]})
     }
-    fetch(this.props.host+'/')
+    fetch(this.props.host+'/', {
+    })
     .then(r => r.json())
     .then(files => {
       if ('Contents' in files){

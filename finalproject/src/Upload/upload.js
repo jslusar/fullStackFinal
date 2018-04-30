@@ -1,6 +1,7 @@
 import './upload.css';
 import React, { Component } from 'react';
-import {Button, Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Button, InputGroup, InputGroupAddon, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Card, CardBody, CardSubtitle, CardText, CardHeader, CardFooter, CardTitle, Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import FileList from './fileList.jsx'
 
 export default class Upload extends Component {
 
@@ -8,9 +9,11 @@ export default class Upload extends Component {
       super();
       this.handleSubmit = this.handleSubmit.bind(this)
       this.toggle = this.toggle.bind(this)
+      this.toggleDropDown = this.toggleDropDown.bind(this);
 
       this.state = {
-        modal: false
+        modal: false,
+        dropdownOpen: false
       };
     }
 
@@ -70,7 +73,7 @@ export default class Upload extends Component {
         progress: this.refs.progress.value,
         file: this.refs.file.value
       };
-      fetch('http://localhost:2000/api/insert', {  //this link will go to our database
+      fetch('http://localhost:9000/api/insert', {  //this link will go to our database
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
@@ -83,6 +86,12 @@ export default class Upload extends Component {
       console.log(JSON.stringify(data))
     }
 
+    toggleDropDown() {
+      this.setState({
+        dropdownOpen: !this.state.dropdownOpen
+      });
+    }
+
 
 
   render() {
@@ -91,7 +100,6 @@ export default class Upload extends Component {
    })
     return(
       <div>
-        <img src={require("./../homepage.jpg") } alt=""/>
         <Navbar>
           <NavbarBrand href="/" className="big-text">Answers On Bucknell Clubs</NavbarBrand>
           <Nav className="ml-auto" navbar>
@@ -100,85 +108,60 @@ export default class Upload extends Component {
           </NavItem>
           </Nav>
         </Navbar>
-      <div id="body" className="body border">
+      <div>
         <h1>Post Submission</h1>
         <h5> Let us know what you are doing!</h5>
+        <br></br>
         <Container>
 
-        <form id="myForm" name="myForm" onSubmit={this.handleSubmit}>
-        <Row>
-        <Col xs="4" md="4" lg="4">
-            <h5>STEP ONE</h5>
-            <label htmlFor="name">
-                First and Last Name: <br/>
-                <input type="text" ref="name" required/>
-            </label>
-        </Col>
-            <br/>
-        <Col xs="4" md="4" lg="4">
-            <h5>STEP TWO</h5>
-            <label> What organization are you posting for? </label><br/>
-               <select ref="organization" required>
-                    {Organization}
-                </select>
-        </Col>
-            <br/>
-        <Col xs="4" md="4" lg="4">
-            <h5>STEP THREE</h5>
-            <label htmlFor="title">
-                Title of your post: <br/>
-                <input type="text" ref="title" required/>
-            </label>
-        </Col>
-        </Row>
-            <br/>
-        <Row>
-        <Col xs="4" md="4" lg="4">
-            <h5>STEP FOUR</h5>
-            <label htmlFor="description">
-                What is your idea? <br/>
-                <p>You will also have the option to upload a file below.</p>
-                <input type="text" ref="description" required/>
-            </label>
-        </Col>
-            <br/>
-        <Col xs="4" md="4" lg="4">
-            <h5>STEP FIVE</h5>
-            <label htmlFor="tags">
-                Describe your post: <br/>
-                <p>These will be used as search TAGS for this document. (ex. voting, elections, hiring, auditions, etc.) </p>
-                <input type="text" ref="tags" required/>
-            </label>
-        </Col>
-            <br/>
-        <Col xs="4" md="4" lg="4">
-            <h5>STEP SIX</h5>
-           <label htmlFor="progress">
-                How is it going? <br/>
-                <select ref="progress">
-                    <option value="Just an Idea">Just an Idea</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Finished">Finished</option>
-                </select>
-            </label>
-        </Col>
-        </Row>
-            <br/>
-        <Row>
-        <Col xs="6" md="6" lg="6">
-            <h5>STEP SEVEN</h5>
-            <label htmlFor="file">
-                Upload a file: <br/>
-                <p>PDFs only please </p>
-                <input type="file" ref="file" accept="application/pdf" multiple/>
-            </label>
-        </Col>
-        <Col xs="6" md="6" lg="6">
-                <button>Submit</button>
-        </Col>
-        </Row>
-
-
+        <form className='body border' onSubmit={this.handleSubmit}>
+          <h5>STEP ONE</h5>
+          <p>First and Last Name</p>
+          <label htmlFor="name">
+            <input className="input" ref="name"/>
+          </label>
+          <br></br>
+          <h5>STEP TWO</h5>
+          <p>What Organization are you Posting for?</p>
+          <select ref="organization" required>
+               {Organization}
+           </select>
+           <br></br>
+          <br></br>
+          <h5>STEP THREE</h5>
+          <p>Title of your Post</p>
+          <label htmlFor="title">
+            <input ref="title"/>
+          </label>
+          <br></br>
+          <h5>STEP FOUR</h5>
+          <p>What is your Idea?</p>
+          <label htmlFor="description">
+            <input ref="description"/>
+          </label>
+          <br></br>
+          <h5>STEP FIVE</h5>
+          <p>Describe your Post with Tags (ex. voting, auditions, hiring, etc.)</p>
+          <label htmlFor="tags">
+            <input ref="tags"/>
+          </label>
+          <br></br>
+          <h5>STEP SIX</h5>
+          <p>How is it Going?</p>
+          <select ref="progress">
+              <option value="Just an Idea">Just an Idea</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Finished">Finished</option>
+          </select>
+          <br></br>
+          <br></br>
+          <h5>STEP SEVEN</h5>
+          <label htmlFor="file">
+              Upload a file: (PDFs only)<br/>
+              <input type="file" ref="file" accept="application/pdf" multiple/>
+          </label>
+          <br></br>
+          <button>Submit</button>
         </form>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>
@@ -204,5 +187,3 @@ export default class Upload extends Component {
     );
   }
 }
-
-

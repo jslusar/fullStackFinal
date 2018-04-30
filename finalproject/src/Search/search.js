@@ -22,17 +22,41 @@ export default class Search extends Component {
         console.log(this.state.popoverOpen);
     }
 
-    //fetch from the database all of the posts
-    getPosts(){
-        fetch('http://localhost:2000/api')
-            .then(resp => {
-                return resp.json()
-            })
-            .then(results => {
-                //create an html of the query of all the organization's posts
-                console.log(results)
-                var a = 0;
-                var cards = []
+    componentDidMount(){
+        fetch('http://localhost:9000/api')
+        .then(resp => {
+          return resp.json()
+        })
+        .then(results => {
+
+        var orgs = []
+        var output = []
+        // get rid of duplicates
+        results.forEach(function(item) {
+    if (output.indexOf(item["organization"]) === -1) {
+      output.push(item["organization"]);
+            }
+        });
+        console.log(output)
+         //create an html of the query
+        for (var i = 0; i < output.length;  i += 1) {
+
+            var f= function(org){
+                var ctitle = org;
+                // this.getPosts(ctitle);
+                return function(e){
+                    // e.preventDefault();
+                    console.log("title "+ ctitle)
+                     console.log("this is org " + ctitle)
+                fetch('http://localhost:9000/api/org/' + ctitle)
+                    .then(resp => {
+                    return resp.json()
+                    })
+                    .then(results => {
+                    //create an html of the query
+                    console.log(results)
+                     var a = 0;
+                    var cards = []
                 for (var j = 0; j < results.length;  j += 1) {
                     cards.push(<Col key = {a++} sm={"6"} md={"6"} lg={"6"}>
                     <Card outline color="primary" className="card">
@@ -155,4 +179,3 @@ export default class Search extends Component {
             );
         }
     }
-
