@@ -14,7 +14,7 @@ export default class Search extends Component {
 
 
     componentDidMount(){
-        fetch('http://localhost:2000/api')
+        fetch('http://localhost:9000/api')
         .then(resp => {
           return resp.json()
         })
@@ -39,7 +39,7 @@ export default class Search extends Component {
                     // e.preventDefault();
                     console.log("title "+ ctitle)
                      console.log("this is org " + ctitle)
-                fetch('http://localhost:2000/api/org/' + ctitle)
+                fetch('http://localhost:9000/api/org/' + ctitle)
                     .then(resp => {
                     return resp.json()
                     })
