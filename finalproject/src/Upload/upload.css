@@ -5,7 +5,6 @@
 
 /*Found formatting online, most likely won't use*/
 body {
-  font-family: 'Roboto Slab', sans-serif;
   background: white;
   text-align: center;
   background-image: url("./../light-grey-terrazzo.png")
@@ -22,7 +21,6 @@ input {
   margin-top: 5px;
   padding: 10px;
   border: 1px solid #cfcfcf;
-  font-family: 'Roboto Slab', sans-serif;
   font-size: 16px;
   outline: none;
   text-align: center;
@@ -67,10 +65,10 @@ h3 {
 .border{
   border: 1px solid black;
   border-radius: 25px;
-  padding: 50px;
+  padding: 12px;
   padding-left: 150px;
   padding-right: 150px;
-  background-color: orange;
+  background-image: url("Facebook Messenger.jpg");
   margin-left: 150px;
   margin-right: 150px;
 }

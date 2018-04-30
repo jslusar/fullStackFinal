@@ -1,7 +1,11 @@
 import './upload.css';
 import React, { Component } from 'react';
-import {Button, InputGroup, InputGroupAddon, InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Input, Card, CardBody, CardSubtitle, CardText, CardHeader, CardFooter, CardTitle, Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import FileList from './fileList.jsx'
+import {Button, Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+/*import FileList from './fileList.jsx';*/
+
+import config from "./../config.json";
+
+var url=config.testserver;
 
 export default class Upload extends Component {
 
@@ -73,7 +77,7 @@ export default class Upload extends Component {
         progress: this.refs.progress.value,
         file: this.refs.file.value
       };
-      fetch('http://localhost:9000/api/insert', {  //this link will go to our database
+      fetch(url + '/api/insert', {  //this link will go to our database
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)

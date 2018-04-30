@@ -1,17 +1,25 @@
+
 .App {
   text-align: center;
 }
 
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 300px;
+  height: 200px;
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-top: 30px;
 }
 
 .App-header {
   background-image: url("home.jpg");
   width: 1150px;
   border-radius: 25px;
-  margin: auto;
+  margin-top: 25px;
+  margin-left: 40px;
+  margin-right: 20px;
+  padding-bottom: 15px;
 }
 
 .App-title {
@@ -28,6 +36,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
 .intro{
   font-size: 30px;
   color: black;

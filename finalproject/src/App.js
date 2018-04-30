@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {Button, ButtonGroup} from 'reactstrap';
 import './App.css';
 
+
 class App extends Component {
 
 
   render() {
     return (
       <div className="App">
-        <body className="App-header">
+        <div className="App-header">
           <h1 className="title">Answers on Bucknell Clubs</h1>
           <br/>
           <br/>
@@ -19,7 +20,7 @@ class App extends Component {
             <img src={require("./arrows.png") } alt="Bucknell B" className="App-logo" />
             <Button color="secondary" href='/search' className="button">Search</Button>
           </ButtonGroup>
-        </body>
+        </div>
       <br/>
       <p className="intro">
           To get started, select Upload or Search above.
