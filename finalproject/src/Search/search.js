@@ -4,7 +4,7 @@ import {Card, CardBody, CardText, CardSubtitle, CardHeader, CardFooter, CardTitl
 
 import config from "./../config.json";
 
-var url= config.testserver;
+var url= config.serverurl;
 
 export default class Search extends Component {
 
