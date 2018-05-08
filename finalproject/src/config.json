@@ -1,5 +1,5 @@
 {
-  "dburl": "mongodb://owner:aipha2Yu@eg-mongodb.bucknell.edu/jms107",
+  "dburl": "mongodb://localhost/jms107",
   "serverurl":"ec2-54-166-28-126.compute-1.amazonaws.com:2000",
   "testserver":"http://localhost:2000"
 }

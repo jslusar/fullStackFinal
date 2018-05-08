@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, ButtonGroup} from 'reactstrap';
+import {Link} from 'react-router-dom';
 import './App.css';
 
 
@@ -16,9 +17,13 @@ class App extends Component {
           <p className="App-intro"> Here you can upload helpful information on your organization. <br/> OR <br/> Have a question? Search through all our helpful posts.</p>
           <br/>
           <ButtonGroup>
-            <Button color="secondary" href='/upload' className="button">Upload</Button>
+            <Link to='/upload'>
+              <Button color="secondary"className="button">Upload</Button>
+            </Link>
             <img src={require("./arrows.png") } alt="Bucknell B" className="App-logo" />
-            <Button color="secondary" href='/search' className="button">Search</Button>
+            <Link to='/search'>
+              <Button color="secondary" className="button">Search</Button>
+            </Link>
           </ButtonGroup>
         </div>
       <br/>

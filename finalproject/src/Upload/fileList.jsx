@@ -1,39 +1,11 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap';
-import { Card, CardText, CardBody, CardSubtitle,
+import { Card, CardText, CardBody,
   CardTitle, Button } from 'reactstrap';
 import {Modal, ModalBody, ModalFooter,ModalHeader} from 'reactstrap';
 import Dropzone from 'react-dropzone'
 
 const Icons = require('react-icons/lib/md')
-const moment = require('moment');
-const filesize = require('filesize')
 
-class FileRow extends Component {
-  // this has to be a react component
-  // so it can have the unique key prop.
-  // if every item in the list has a unique key, react can optimize refreshs
-  // probably overkill since the whole row changes at the same time.
-
-  render(){
-    let fi = this.props.fileinfo
-    let d = Date.parse(fi.LastModified)
-    return (
-      <tr>
-        <th key={"num."+fi.Key} scope="row" >{this.props.index}</th>
-        <td key={"key."+fi.Key} >{fi.Key}</td>
-        <td key={"mod."+fi.Key} >{moment(d).fromNow()}</td>
-        <td key={"size."+fi.Key} >{filesize(fi.Size)}</td>
-        <td key={"get."+fi.Key} >
-          <a href={this.props.url} target="_blank">
-            <Button color="success" size="sm"><Icons.MdFileDownload/></Button></a>
-          <Button color="danger" size="sm"
-            onClick={()=>this.props.onDelete(fi.Key)}><Icons.MdDeleteForever/></Button>
-        </td>
-      </tr>
-    )
-  }
-}
 
 export default class FileList extends Component{
   constructor(props){
