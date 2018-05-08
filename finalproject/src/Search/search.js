@@ -10,19 +10,53 @@ export default class Search extends Component {
 
     constructor(props){
         super(props)
-        /*this.getPosts = this.getPosts.bind(this);*/
-        this.toggle = this.toggle.bind(this);
+        this.getPosts = this.getPosts.bind(this);
+        /*this.toggle = this.toggle.bind(this);*/
         this.state = {data: null, header: 'Choose an Organization',button: null, popoverOpen: false};
 
     }
 
     //used to toggle the popover to show the description of each post
-    toggle(){
-        console.log(this.state.popoverOpen);
-        this.setState({
-            popoverOpen: !this.state.popoverOpen
-        });
-        console.log(this.state.popoverOpen);
+    // toggle(){
+    //     console.log(this.state.popoverOpen);
+    //     this.setState({
+    //         popoverOpen: !this.state.popoverOpen
+    //     });
+    //     console.log(this.state.popoverOpen);
+    // }
+
+    //fetch from the database all of the posts
+    getPosts(){
+        fetch(url + '/api')
+            .then(resp => {
+                return resp.json()
+            })
+            .then(results => {
+                //create an html of the query of all the organization's posts
+                console.log(results)
+                var a = 0;
+                var cards = []
+                for (var j = 0; j < results.length;  j += 1) {
+                    cards.push(<Col key = {a++} sm={"6"} md={"6"} lg={"6"}>
+                    <Card outline color="primary" className="card">
+                        <CardHeader className="text-muted">{results[j]["organization"] + ' ('+results[j]["progress"]+')'} </CardHeader>
+                        <CardBody>
+                            <CardTitle className="ctitle">{results[j]["title"]}</CardTitle>
+                            <CardSubtitle className="author">{"Written by: " + results[j]["name"]}</CardSubtitle>
+                            <CardText>{results[j]["description"]}</CardText>
+                            <br/>
+                                <Button color="warning">See Attached File(s)</Button>
+                        </CardBody>
+                        <CardFooter className="text-muted">{"Tags: " + results[j]["tags"]}</CardFooter>
+                    </Card>
+                    </Col>)
+                }
+                //update the page with the new cards of all the posts, a new header, and add a back button on top left
+                this.setState({data: cards, header: 'All Organizations', button: <Button className="floatL" color="primary" href="/search">Back</Button>})
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     }
 
 

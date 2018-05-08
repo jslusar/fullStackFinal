@@ -1,11 +1,11 @@
 import './upload.css';
 import React, { Component } from 'react';
 import {Button, Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-/*import FileList from './fileList.jsx';*/
+import FileList from './fileList.jsx';
 
 import config from "./../config.json";
 
-var url=config.testserver;
+var url=config.serverurl;
 
 export default class Upload extends Component {
 
@@ -160,10 +160,9 @@ export default class Upload extends Component {
           <br></br>
           <br></br>
           <h5>STEP SEVEN</h5>
-          <label htmlFor="file">
               Upload a file: (PDFs only)<br/>
-              <input type="file" ref="file" accept="application/pdf" multiple/>
-          </label>
+              <FileList
+                host="http://localhost:2000"/>
           <br></br>
           <button>Submit</button>
         </form>

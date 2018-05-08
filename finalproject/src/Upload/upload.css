@@ -7,7 +7,7 @@
 body {
   background: white;
   text-align: center;
-  background-image: url("./../light-grey-terrazzo.png")
+  /*background-image: url("./../light-grey-terrazzo.png")*/
 }
 
 
@@ -68,7 +68,8 @@ h3 {
   padding: 12px;
   padding-left: 150px;
   padding-right: 150px;
-  background-image: url("Facebook Messenger.jpg");
+  /*background-image: url("Facebook Messenger.jpg");*/
+  background: linear-gradient(to bottom, blue, lightblue, white);
   margin-left: 150px;
   margin-right: 150px;
 }

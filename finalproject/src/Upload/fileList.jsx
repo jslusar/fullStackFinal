@@ -46,25 +46,11 @@ export default class FileList extends Component{
       accept: "" // this seems to accept ALL file types.
       //accept: "text/*. image/*, application/*"
     }
-    this.refreshFiles = this.refreshFiles.bind(this)
+    // this.refreshFiles = this.refreshFiles.bind(this)
     this.toggleFileUploadDialog = this.toggleFileUploadDialog.bind(this)
     this.handleDrop = this.handleDrop.bind(this)
     this.handleDropEnter = this.handleDropEnter.bind(this)
     this.handleDropLeave = this.handleDropLeave.bind(this)
-    this.deleteFile = this.deleteFile.bind(this)
-  }
-  deleteFile(key){
-    //request the file be deleted from S3
-    console.log("delete reqested for", key)
-    fetch(this.props.host+'/remove/'+key,
-      {
-        method:'POST',
-      })
-      .then(resp=>resp.json())
-      .then(resp=>{
-        console.log("delete result", resp)
-        this.refreshFiles(true)
-      })
   }
   handleDrop(accepted, rejected){
     // when a file drop is complete, this does the work
@@ -107,48 +93,7 @@ export default class FileList extends Component{
   toggleFileUploadDialog(){
     this.setState({showUploadModal: !this.state.showUploadModal})
   }
-  refreshFiles(noFlush){
-    console.log('refreshing file list')
-    var d = new Date()
-    if (!noFlush){
-      this.setState({files:[]})
-    }
-    fetch(this.props.host+'/', {
-    })
-    .then(r => r.json())
-    .then(files => {
-      if ('Contents' in files){
-        this.setState({files: files.Contents})
-      }else{
-        // something went very wrong on the server side.
-        this.setState({files: [], error: files})
-      }
-      var n = new Date()
-      console.log("refresh took", n - d, 'ms')
-    })
-    .catch(err => {
-      this.setState({error:err})
-    })
-
-  }
-  componentWillMount(){
-    this.refreshFiles()
-  }
   render(){
-
-    // rows is the list of files from S3.
-    let rows = this.state.files.map( (fileinfo, idx) =>{
-      let url = this.props.host+'/'+fileinfo.Key
-      return (
-        <FileRow
-          key={fileinfo.Key}
-          fileinfo={fileinfo}
-          index={idx}
-          url={url}
-          onDelete={this.deleteFile}
-        />
-      )
-    })
 
     // modal dialog for uploads.
     var uploadModal = (
@@ -170,7 +115,6 @@ export default class FileList extends Component{
           </ModalBody>
         </Dropzone>
         <ModalFooter>
-          <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
@@ -181,38 +125,13 @@ export default class FileList extends Component{
       <Card>
         {uploadModal}
         <CardBody>
-          <CardTitle>File List for {this.props.bucket}</CardTitle>
-          {this.state.files.length === 1 ? (
-            <CardSubtitle>There is {this.state.files.length} file.</CardSubtitle>
-          ):(
-            <CardSubtitle>There are {this.state.files.length} files.</CardSubtitle>
-          )}
           <CardText></CardText>
             <div>
-              <Table size="sm" striped>
-                <thead>
-                  <tr>
-                    <th key="num.head">#</th>
-                    <th key="num.name">Name</th>
-                    <th key="num.mod">Modified</th>
-                    <th key="num.size">Size</th>
-                    <th key="num.link">Link</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows}
-                </tbody>
-              </Table>
               <div>
                 <Button color="success"
                   onClick={this.toggleFileUploadDialog}>
                   <Icons.MdAddCircle/>
                   Add File
-                </Button>
-                <Button className="float-right" color="primary"
-                  onClick={this.refreshFiles}>
-                  <Icons.MdSync/>
-                  Refresh List
                 </Button>
               </div>
             </div>
